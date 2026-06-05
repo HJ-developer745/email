@@ -1,0 +1,89 @@
+/* Center the form on the screen beautifully */
+body {
+  background-color: #0f172a; /* Deep premium dark background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+/* Smooth fade-in entry animation for the form card */
+form {
+  background-color: #1e293b;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+  border: 1px solid #334155;
+  animation: formFadeIn 0.5s ease-out forwards;
+}
+
+.field {   
+  margin-bottom: 20px; 
+}
+
+.field label {   
+  display: block;   
+  font-size: 13px;   
+  color: #94a3b8; /* Muted silver/slate */
+  margin-bottom: 6px;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.field input {   
+  display: block;   
+  min-width: 250px;   
+  line-height: 1.5;   
+  font-size: 14px;
+  padding: 8px 12px;
+  background-color: #0f172a;
+  border: 1px solid #475569;
+  border-radius: 6px;
+  color: #fff;
+  outline: none;
+  transition: all 0.3s ease; /* Animation transition for focus */
+}
+
+/* Glow animation when you click inside the input box */
+.field input:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
+}
+
+input[type="submit"] {   
+  display: block;   
+  padding: 10px 30px;   
+  font-size: 14px;   
+  font-weight: 600;
+  background-color: #3b82f6; /* Upgraded vibrant blue */
+  color: #fff;   
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  width: 100%;
+  transition: all 0.2s ease; /* Animation transition for hovers/clicks */
+}
+
+/* Hover and click animations for the submit button */
+input[type="submit"]:hover {
+  background-color: #2563eb;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+input[type="submit"]:active {
+  transform: scale(0.98); /* Subtle button press down animation */
+}
+
+/* Keyframe definition for the form's entrance animation */
+@keyframes formFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
