@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: sans-serif; }
+        body { 
+            background-color: #93c5fd; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh; 
+        }
+        .login-container {
+            background: linear-gradient(135deg, rgba(59,130,246,0.2), rgba(99,102,241,0.15));
+            width: 400px;
+            padding: 40px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        h2 { margin-bottom: 30px; font-weight: 400; }
+        .input-group { margin-bottom: 25px; }
+        .input-group label { display: block; font-size: 12px; color: #555; margin-bottom: 5px; }
+        .input-group input {
+            width: 100%;
+            border: none;
+            border-bottom: 1px solid #ccc;
+            padding: 8px 0;
+            outline: none;
+        }
+        .forgot-password {
+            display: block;
+            text-align: center;
+            font-size: 12px;
+            color: #777;
+            text-decoration: none;
+            margin-bottom: 30px;
+        }
+        .button-group { display: flex; }
+        button {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            transition: opacity 0.3s;
+        }
+        .register-btn { background-color: #e0e0e0; color: #333; }
+        .signin-btn { background-color: #3b82f6; color: white; }
+        button:hover { opacity: 0.9; }
+    </style>
+</head>
+<body>
+
+    <div class="login-container">
+        <h2>Login</h2>
+        <form id="loginForm">
+            <div class="input-group">
+                <label>EMAIL / USERNAME</label>
+                <input type="text" id="email" required>
+            </div>
+            <div class="input-group">
+                <label>PASSWORD</label>
+                <input type="password" id="password" required>
+            </div>
+           
+            <div class="button-group">
+             
+                <button type="submit" class="signin-btn">SIGN IN</button>
+            </div>
+        </form>
+    </div>
+
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const usernameInput = document.getElementById('email').value;
+        const passwordInput = document.getElementById('password').value;
+        
+        const correctUser = 'hj';
+        const correctPass = '12126755';
+        
+        if (usernameInput === correctUser && passwordInput === correctPass) {
+            
+            window.location.href = "index.html";
+        } else {
+            alert('Invalid Username or Password. Please try again.');
+        }
+    });
+</script>
+</body>
+</html>
