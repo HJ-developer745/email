@@ -1,89 +1,260 @@
-/* Center the form on the screen beautifully */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 body {
-  background-color: #0f172a; /* Deep premium dark background */
+  background-color: #080c14;
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  margin: 0;
-  font-family: system-ui, -apple-system, sans-serif;
+  font-family: 'DM Sans', sans-serif;
+  overflow: hidden;
+  position: relative;
 }
 
-/* Smooth fade-in entry animation for the form card */
-form {
-  background-color: #1e293b;
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
-  border: 1px solid #334155;
-  animation: formFadeIn 0.5s ease-out forwards;
+/* ── Ambient orbs ── */
+.bg-orbs {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
 }
 
-.field {   
-  margin-bottom: 20px; 
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.18;
 }
 
-.field label {   
-  display: block;   
-  font-size: 13px;   
-  color: #94a3b8; /* Muted silver/slate */
-  margin-bottom: 6px;
-  font-weight: 500;
-  text-transform: capitalize;
+.orb-1 {
+  width: 480px;
+  height: 480px;
+  background: radial-gradient(circle, #3b82f6, transparent 70%);
+  top: -120px;
+  left: -100px;
+  animation: drift1 14s ease-in-out infinite alternate;
 }
 
-.field input {   
-  display: block;   
-  min-width: 250px;   
-  line-height: 1.5;   
-  font-size: 14px;
-  padding: 8px 12px;
-  background-color: #0f172a;
-  border: 1px solid #475569;
-  border-radius: 6px;
-  color: #fff;
-  outline: none;
-  transition: all 0.3s ease; /* Animation transition for focus */
+.orb-2 {
+  width: 360px;
+  height: 360px;
+  background: radial-gradient(circle, #6366f1, transparent 70%);
+  bottom: -80px;
+  right: -60px;
+  animation: drift2 18s ease-in-out infinite alternate;
 }
 
-/* Glow animation when you click inside the input box */
-.field input:focus {
-  border-color: #3b82f6;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
+.orb-3 {
+  width: 260px;
+  height: 260px;
+  background: radial-gradient(circle, #0ea5e9, transparent 70%);
+  top: 50%;
+  left: 60%;
+  animation: drift3 22s ease-in-out infinite alternate;
 }
 
-input[type="submit"] {   
-  display: block;   
-  padding: 10px 30px;   
-  font-size: 14px;   
-  font-weight: 600;
-  background-color: #3b82f6; /* Upgraded vibrant blue */
-  color: #fff;   
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  width: 100%;
-  transition: all 0.2s ease; /* Animation transition for hovers/clicks */
+@keyframes drift1 {
+  from { transform: translate(0, 0) scale(1); }
+  to   { transform: translate(40px, 60px) scale(1.1); }
+}
+@keyframes drift2 {
+  from { transform: translate(0, 0) scale(1); }
+  to   { transform: translate(-50px, -40px) scale(1.08); }
+}
+@keyframes drift3 {
+  from { transform: translate(0, 0) scale(1); }
+  to   { transform: translate(-30px, 50px) scale(0.95); }
 }
 
-/* Hover and click animations for the submit button */
-input[type="submit"]:hover {
-  background-color: #2563eb;
-  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+/* ── Card wrapper ── */
+.card-wrapper {
+  position: relative;
+  z-index: 1;
+  width: 400px;
+  background: rgba(15, 22, 38, 0.72);
+  border: 1px solid rgba(148, 163, 184, 0.12);
+  border-radius: 20px;
+  padding: 44px 40px 36px;
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  box-shadow:
+    0 0 0 1px rgba(59, 130, 246, 0.06),
+    0 32px 64px -16px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  animation: cardIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  opacity: 0;
+  transform: translateY(24px);
 }
 
-input[type="submit"]:active {
-  transform: scale(0.98); /* Subtle button press down animation */
-}
-
-/* Keyframe definition for the form's entrance animation */
-@keyframes formFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
+@keyframes cardIn {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+/* ── Card header ── */
+.card-header {
+  text-align: center;
+  margin-bottom: 36px;
+}
+
+.icon-ring {
+  width: 52px;
+  height: 52px;
+  margin: 0 auto 20px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(59,130,246,0.2), rgba(99,102,241,0.15));
+  border: 1px solid rgba(99,102,241,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #93c5fd;
+  animation: iconPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s both;
+}
+
+@keyframes iconPop {
+  from { transform: scale(0.6); opacity: 0; }
+  to   { transform: scale(1);   opacity: 1; }
+}
+
+.card-header h1 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 22px;
+  font-weight: 500;
+  color: #f1f5f9;
+  letter-spacing: -0.01em;
+  margin-bottom: 8px;
+  animation: fadeUp 0.5s ease 0.4s both;
+}
+
+.card-header p {
+  font-size: 13.5px;
+  color: #64748b;
+  font-weight: 300;
+  letter-spacing: 0.01em;
+  animation: fadeUp 0.5s ease 0.5s both;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Form ── */
+#form {
+  animation: fadeUp 0.5s ease 0.55s both;
+}
+
+.field {
+  margin-bottom: 20px;
+}
+
+.field label {
+  display: block;
+  font-size: 11.5px;
+  font-weight: 500;
+  color: #475569;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 10px;
+}
+
+.input-wrap {
+  position: relative;
+}
+
+.input-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #475569;
+  pointer-events: none;
+  transition: color 0.25s ease;
+}
+
+.field input[type="text"] {
+  display: block;
+  width: 100%;
+  padding: 12px 14px 12px 40px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  background: rgba(8, 12, 20, 0.6);
+  border: 1px solid rgba(71, 85, 105, 0.5);
+  border-radius: 10px;
+  color: #e2e8f0;
+  outline: none;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  caret-color: #3b82f6;
+}
+
+.field input[type="text"]::placeholder {
+  color: #334155;
+}
+
+.field input[type="text"]:focus {
+  border-color: rgba(59, 130, 246, 0.7);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.12);
+}
+
+.field input[type="text"]:focus ~ .input-icon,
+.input-wrap:focus-within .input-icon {
+  color: #3b82f6;
+}
+
+/* ── Submit button ── */
+input[type="submit"] {
+  display: block;
+  width: 100%;
+  padding: 13px 24px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  background: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 20px -4px rgba(59, 130, 246, 0.45);
+  margin-top: 8px;
+}
+
+input[type="submit"]:hover {
+  opacity: 0.88;
+  box-shadow: 0 6px 28px -4px rgba(59, 130, 246, 0.55);
+}
+
+input[type="submit"]:active {
+  transform: scale(0.982);
+}
+
+input[type="submit"]:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ── Footer note ── */
+.footer-note {
+  text-align: center;
+  font-size: 11.5px;
+  color: #334155;
+  margin-top: 24px;
+  letter-spacing: 0.04em;
+  animation: fadeUp 0.5s ease 0.7s both;
+}
+
+/* ── Responsive ── */
+@media (max-width: 460px) {
+  .card-wrapper {
+    width: calc(100vw - 40px);
+    padding: 36px 28px 28px;
   }
 }
